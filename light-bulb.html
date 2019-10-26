@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Añado biblioteca paho que es un cliente MQTT para navegador -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+
+    <title>Light Bulb - Light Bulb Example</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h4>Simulación de una ampolleta con MQTT</h4>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <img id="light-bulb" src="img/light-bulb-off.png" class="img-fluid">
+          </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+
+      // Creamos una instancia del cliente MQTT
+      var clientId = "swarm-educate";
+      clientId += new Date().getUTCMilliseconds();
+      var client = new Paho.MQTT.Client("educate.swarm.cl", 8080 , clientId);
+
+      // Inducamos las funciones que se ejecutarán ante estos eventos
+      client.onConnectionLost = onConnectionLost;
+      client.onMessageArrived = onMessageArrived;
+
+      // Realizamos la conexión
+      client.connect({onSuccess:onConnect});
+
+
+      //Declaramos las funciones
+      // Esta función es llamada cuando se logra conectar al broker
+      function onConnect() {
+        // Avisamos por consola que nos conectamos correctamente
+        console.log("onConnect");
+        //Nos suscribimos al tópico de la bombilla, de esta manera podemos saber si está encendida o apagada
+        client.subscribe("light-bulb/device/1");
+        //Hay que recordar que como se está publicando en este tópico con el atributo "retained" siempre recibiremos la última publicación que se hizo en este tópico si es que existe, y así saber el estado en el que quedó la última vez
+      }
+
+      // Esta función es llamada cuando el cliente pierde conexión con el Broker
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+          console.log("onConnectionLost:"+responseObject.errorMessage);
+        }
+      }
+
+      // Función llamada cuando llegan mensajes al tópico suscrito
+      function onMessageArrived(message) {
+        //Mostramos en consola como debug el mensaje que llegó
+        console.log("onMessageArrived:"+message.payloadString);
+        //Parseamos el mensaje para dejarlo como un objeto
+        var package = JSON.parse(message.payloadString);
+        if(package.status){
+          //Signifca que la ampolleta debe encenderse
+          document.getElementById("light-bulb").src = "img/light-bulb-on.png";
+        }else{
+          //la ampolleta debe apagarse
+          document.getElementById("light-bulb").src = "img/light-bulb-off.png";
+        }
+      }
+    </script>
+  </body>
+</html>
