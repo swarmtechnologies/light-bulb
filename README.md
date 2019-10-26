@@ -1,7 +1,7 @@
 # light-bulb
 _Este proyecto es un ejemplo de un prototipo que hace uso de MQTT para simular el comportamiento de una ampolleta (light bulb) con internet capaz de ser encendida y apagada con un interruptor remoto a través de MQTT._
 
-_La finalidad principal de este ejemplo es demostrar cómo se puede sacar provecho de la propiedad de mensaje retenido de MQTT que consiste en conservar la última publicación a un tópico para que esta pueda ser enviada cuando un cliente se suscriba a ese tópico en particular y así conocer el último estado._
+_La finalidad principal de este ejemplo es mostrar como se puede sacar provecho de la propiedad de mensaje retenido de MQTT que consiste en conservar la última publicación a un tópico para que esta pueda ser enviada cuando un cliente se suscriba a ese tópico en particular y así conocer el último estado._
 
 _Gracias a esta propiedad podemos prototipar de forma rápida una aplicación de estas características sin la necesidad de hacer uso de una base de datos o de un servidor que maneje una  cierta lógica._
 
@@ -22,7 +22,9 @@ _Ya que este prototipo no tiene código del lado del servidor, no es necesario u
 
 ### Instalación 🔧
 
-_Este prototipo no requiere de ninguna instalación, es tan sencillo como clonar el repositorio o descargarlo directamente desde GitHub, entrar al proyecto y abrir ambos archivos html (light-bulb.html y switch.html) con un navegador a elección._
+_La instalación de este prototipo, es tan sencilla como clonar el repositorio o descargarlo directamente desde GitHub, entrar al proyecto y abrir el archivo "index.html" con un navegador a elección._
+
+_El archivo "index.html" muestra un menú que permite abrir los otros dos archivos que están dentro de la carpeta ("light-bulb.html" y "switch.html"). Abrirlos desde "index.html" es equivalente a abrirlos manualmente desde la carpeta._
 
 _Si se está utilizando un Broker MQTT propio se deben modificar los datos de conexión en ambos archivos._
 
