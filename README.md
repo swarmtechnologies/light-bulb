@@ -1,9 +1,9 @@
 # light-bulb
-_Este proyecto es un ejemplo de un prototipo que hace uso de MQTT para simular el comportamiento de una ampolleta (light bulb) con internet capaz de ser encendida y apagada con un interruptor remoto a través de MQTT._
+_Este proyecto es un ejemplo de un prototipo que hace uso de MQTT para simular el comportamiento de una ampolleta (light bulb) con internet capaz de ser encendida y apagada con un interruptor de forma remota._
 
 _La finalidad principal de este ejemplo es mostrar como se puede sacar provecho de la propiedad de mensaje retenido de MQTT que consiste en conservar la última publicación a un tópico para que esta pueda ser enviada cuando un cliente se suscriba a ese tópico en particular y así conocer el último estado._
 
-_Gracias a esta propiedad podemos prototipar de forma rápida una aplicación de estas características sin la necesidad de hacer uso de una base de datos o de un servidor que maneje una  cierta lógica._
+_Gracias a esta propiedad podemos prototipar de forma rápida una aplicación de estas características sin la necesidad de hacer uso de una base de datos o de un servidor que maneje una cierta lógica._
 
 ## Comenzando 🚀
 
