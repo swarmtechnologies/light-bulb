@@ -26,7 +26,7 @@ _Este prototipo no requiere de ninguna instalación, es tan sencillo como clonar
 
 _Si se está utilizando un Broker MQTT propio se deben modificar los datos de conexión en ambos archivos._
 
-_Se encuentra una copia de este prototipo funcionando en [este link](http://educate.swarm.cl/light-bulb/)_
+_Se encuentra una copia de este prototipo funcionando en [este link](http://educate.swarm.cl/light-bulb/)._
 ## Construido con 🛠️
 
 * [Paho](https://www.eclipse.org/paho/clients/js/) - Cliente MQTT usado por los ejemplos web de MQTT
